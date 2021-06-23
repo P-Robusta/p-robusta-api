@@ -25,6 +25,7 @@ class Post extends Model
         'content',
         'id_category',
         'time_event',
+        'post_deleted',
     ];
 
     public function category()
