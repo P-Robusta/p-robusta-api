@@ -16,9 +16,6 @@ The API for landing page of &lt;[Passerelles numériques Vietnam](https://www.pa
 
 ## Requirements
 
--   [Node](https://nodejs.org/en/) &gt;=14.6.0 / [npm](https://www.npmjs.com/) &gt;=5.3.0
-    -   Recommend installing with [nvm](https://github.com/creationix/nvm)
--   [Yarn](https://classic.yarnpkg.com) &gt;=1.22.4
 -   [Composer](https://getcomposer.org/download/) &gt;=2.1.3
 -   [Laravel](https://laravel.com/) &gt;=8.x
 
@@ -26,7 +23,6 @@ The API for landing page of &lt;[Passerelles numériques Vietnam](https://www.pa
 
 -   HTML/CSS/JavaScript
 -   SASS/SCSS
--   ReactJS
 -   Laravel
 -   MySQL
 
@@ -39,10 +35,6 @@ Step by step to run this app in your local
 At your directory root, run:
 
 ```
-npm/yarn install
-```
-
-```
 composer install
 ```
 
@@ -51,10 +43,6 @@ php artisan key:generate
 ```
 
 ### Run server
-
-```
-npm/yarn run watch
-```
 
 ```
 php artisan serve
