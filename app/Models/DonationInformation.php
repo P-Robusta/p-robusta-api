@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DonationInformation extends Model
 {
     use HasFactory;
+
     protected $table = 'donation_information';
 
-    public $timestamps = true;
     /**
      * The attributes that are mass assignable.
      *
