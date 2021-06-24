@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(NumberOverviewSeed::class);
+        $this->call(DonationInfomationSeed::class);
+        $this->call(GeneralInformationSeed::class);
     }
 }
