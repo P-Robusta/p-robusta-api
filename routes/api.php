@@ -22,37 +22,21 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('number_overviews', NumberOverview::class)->except(['store', 'destroy']);
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('categories', 'Api\CategoryController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('posts', 'Api\PostController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('comments', 'Api\CommentController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('join_us', 'Api\JoinUsController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('join_us_tags', 'Api\JoinUsTagController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('staff', 'Api\StaffController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('banners', 'Api\BannerController');
-});
 
-Route::middleware('auth:api')->group(function () {
     Route::apiResource('donor_information', 'Api\DonorInformationController');
 });
 
