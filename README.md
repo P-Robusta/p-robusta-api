@@ -16,9 +16,6 @@ The API for landing page of &lt;[Passerelles numériques Vietnam](https://www.pa
 
 ## Requirements
 
--   [Node](https://nodejs.org/en/) &gt;=14.6.0 / [npm](https://www.npmjs.com/) &gt;=5.3.0
-    -   Recommend installing with [nvm](https://github.com/creationix/nvm)
--   [Yarn](https://classic.yarnpkg.com) &gt;=1.22.4
 -   [Composer](https://getcomposer.org/download/) &gt;=2.1.3
 -   [Laravel](https://laravel.com/) &gt;=8.x
 
@@ -26,7 +23,6 @@ The API for landing page of &lt;[Passerelles numériques Vietnam](https://www.pa
 
 -   HTML/CSS/JavaScript
 -   SASS/SCSS
--   ReactJS
 -   Laravel
 -   MySQL
 
@@ -39,10 +35,6 @@ Step by step to run this app in your local
 At your directory root, run:
 
 ```
-npm/yarn install
-```
-
-```
 composer install
 ```
 
@@ -50,17 +42,50 @@ composer install
 php artisan key:generate
 ```
 
-### Run server
+```
+php artisan db:default
+```
 
 ```
-npm/yarn run watch
+php artisan migrate --seed
 ```
+
+```
+php artisan config:clear
+```
+
+```
+php artisan passport:keys
+```
+
+```
+php artisan passport:purge
+```
+
+### Run server
 
 ```
 php artisan serve
 ```
 
 Open on web: http://localhost:8000 (this is by default, you can custom it)
+URL of API: http://localhost:8000/api
+
+### Access api
+
+-   Registe an account in http://localhost:8000/api/register with a form data that have fields:
+    {
+    name : <your_user_name>
+    email : <your_email>
+    password : <your_password>
+    c_password : <your_c_password>
+    }
+
+-   Login and get a access token in http://localhost:8000/api/login with a form data that have fields:
+    {
+    email : <your_email>
+    password : <your_password>
+    }
 
 _You can update the source structures to follow your patterns._
 
