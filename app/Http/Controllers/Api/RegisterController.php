@@ -32,8 +32,7 @@ class RegisterController extends BaseController
 
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        // $user = User::find(8);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['token'] =  $user->createToken('My Token')->accessToken;
         $success['name'] =  $user->name;
         return $this->sendResponse($success, 'User register successfully.');
     }
@@ -51,10 +50,11 @@ class RegisterController extends BaseController
         ]);
         if (Auth::attempt($login)) {
             $user = Auth::user();
-            // $success['token'] =  $user->createToken('MyApp')->accessToken;
-            // $success['name'] =  $user->name;
+            $findUser = User::find($user->id);
+            $success['token'] = $findUser->createToken('My Token')->accessToken;
+            $success['name'] =  $findUser->name;
 
-            return $this->sendResponse($user, 'User login successfully.');
+            return $this->sendResponse($success, 'User login successfully.');
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }

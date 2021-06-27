@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\NumberOverviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
-use App\Models\NumberOverview;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::apiResource('number_overviews', NumberOverview::class)->except(['store', 'destroy']);
+    Route::apiResource('number_overviews', NumberOverviewController::class)->except(['store', 'destroy']);
 
     Route::apiResource('categories', 'Api\CategoryController');
 

@@ -26,11 +26,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // if (!$this->app->routesAreCached()) {
         Passport::routes();
-        Passport::loadKeysFrom(__DIR__ . '/../secrets/oauth');
-        Passport::hashClientSecrets();
+        // }
+
+        // Passport::loadKeysFrom(__DIR__ . '/../secrets/oauth');
+        // Passport::hashClientSecrets();
+        // Set expire for token
         Passport::tokensExpireIn(now()->addDays(15));
         Passport::refreshTokensExpireIn(now()->addDays(30));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        // Implicit Grant Tokens
+        // Passport::enableImplicitGrant();
     }
 }
