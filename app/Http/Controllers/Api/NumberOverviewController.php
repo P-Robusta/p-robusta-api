@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\NumberOverview;
 use Illuminate\Http\Request;
 
-class NumberOverviewController extends Controller
+class NumberOverviewController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class NumberOverviewController extends Controller
     public function index()
     {
         $num = NumberOverview::all();
-        return response()->json($num);
+        return $this->sendResponse($num, 'Get successfully!');
     }
 
     /**
@@ -27,16 +28,6 @@ class NumberOverviewController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        // ]);
-
-        // $contact = NumberOverview::create($request->all());
-
-        // return response()->json([
-        //     'message' => 'NumberOverview created',
-        // ]);
     }
 
     /**
@@ -48,7 +39,7 @@ class NumberOverviewController extends Controller
     public function show(NumberOverview  $numberOverview)
     {
         $num = NumberOverview::find($numberOverview);
-        return response()->json($num);
+        return $this->sendResponse($num, 'Get successfully!');
     }
 
     /**
@@ -61,10 +52,10 @@ class NumberOverviewController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'current_students' => 'number',
-            'alumni' => 'number',
-            'percent_get_job' => 'number',
-            'partnership' => 'number',
+            'current_students' => 'numeric',
+            'alumni' => 'numeric',
+            'percent_get_job' => 'numeric',
+            'partnership' => 'numeric',
         ]);
         $num = NumberOverview::find($id);
 
@@ -75,16 +66,7 @@ class NumberOverviewController extends Controller
 
         $num->save();
 
-        // $message = [
-        //     'content' => 'Cám ơn bạn "' . $request->name . '" đã liên hệ.',
-        // ];
-
-        // SendEmail::dispatch($message, $request->email, null)->delay(now()->addMinute(1));
-
-        return response()->json([
-            'message' => 'NumberOverview updated!',
-            'NumberOverview' => $num
-        ]);
+        return $this->sendResponse($num, 'NumberOverview updated!');
     }
 
     /**

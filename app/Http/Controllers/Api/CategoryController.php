@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return $this->sendResponse($categories, 'Get successfully.');
     }
 
     /**
@@ -26,7 +28,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'category' => 'required|string|unique:categories',
+        ], [
+            'category.unique' => 'Thẻ này đã tồn tại!!!',
+            'category.required' => 'Không được để trống trường này!'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $category = Category::create($input);
+
+        return $this->sendResponse($category, 'Created successfully.');
     }
 
     /**
@@ -37,7 +54,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $res = Category::find($category);
+        return $this->sendResponse($res, 'Get successfully.');
     }
 
     /**
@@ -47,9 +65,19 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category  $category)
     {
-        //
+        $request->validate([
+            'category' => 'required|string|unique:categories',
+        ]);
+
+        $update = Category::find($category->id);
+
+        $update->category = $request->category;
+
+        $update->save();
+
+        return $this->sendResponse($update, 'Updated successfully.');
     }
 
     /**
@@ -58,8 +86,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return $this->sendResponse($category, 'Deleted successfully.');
     }
 }
