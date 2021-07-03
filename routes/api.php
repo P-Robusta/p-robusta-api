@@ -2,17 +2,18 @@
 
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\DonorInformationController;
 use App\Http\Controllers\Api\JoinUsController;
 use App\Http\Controllers\Api\JoinUsTagController;
 use App\Http\Controllers\Api\NumberOverviewController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\Api\StaffController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('banners', BannerController::class);
 
-    Route::apiResource('donor_information', DonorInformationController::class);
+    Route::apiResource('notifications', NotificationController::class);
 });
 
 /**

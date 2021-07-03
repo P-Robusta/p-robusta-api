@@ -23,7 +23,7 @@ class JoinUs extends Model
         'reporting_to',
         'status',
         'project',
-        'stat_date',
+        'start_date',
         'location',
         'jd',
     ];

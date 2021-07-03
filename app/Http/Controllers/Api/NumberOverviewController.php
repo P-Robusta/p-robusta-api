@@ -38,8 +38,7 @@ class NumberOverviewController extends BaseController
      */
     public function show(NumberOverview  $numberOverview)
     {
-        $num = NumberOverview::find($numberOverview);
-        return $this->sendResponse($num, 'Get successfully!');
+        return $this->sendResponse($numberOverview, 'Get successfully!');
     }
 
     /**
@@ -49,24 +48,18 @@ class NumberOverviewController extends BaseController
      * @param  \App\Models\NumberOverview  $numberOverview
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NumberOverview  $numberOverview)
     {
-        $request->validate([
+        $input = $request->validate([
             'current_students' => 'numeric',
             'alumni' => 'numeric',
-            'percent_get_job' => 'numeric',
+            'percent_get_job' => 'numeric|max:100|min:0',
             'partnership' => 'numeric',
         ]);
-        $num = NumberOverview::find($id);
 
-        $num->current_students = $request->current_students;
-        $num->alumni = $request->alumni;
-        $num->percent_get_job = $request->percent_get_job;
-        $num->partnership = $request->partnership;
+        $numberOverview->update($input);
 
-        $num->save();
-
-        return $this->sendResponse($num, 'NumberOverview updated!');
+        return $this->sendResponse($numberOverview, 'NumberOverview updated!');
     }
 
     /**

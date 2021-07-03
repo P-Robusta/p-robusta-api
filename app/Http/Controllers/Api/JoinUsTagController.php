@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use App\Models\JoinUsTag;
 use Illuminate\Http\Request;
 
-class JoinUsTagController extends Controller
+class JoinUsTagController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class JoinUsTagController extends Controller
      */
     public function index()
     {
-        //
+        $tag = JoinUsTag::all();
+        return $this->sendResponse($tag, 'Get successfully.');
     }
 
     /**
@@ -26,7 +27,13 @@ class JoinUsTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tag' => 'required|string|unique:join_us_tags',
+        ]);
+
+        $tag = JoinUsTag::create($request->all());
+
+        return $this->sendResponse($tag, 'Created successfully.');
     }
 
     /**
@@ -37,7 +44,8 @@ class JoinUsTagController extends Controller
      */
     public function show(JoinUsTag $joinUsTag)
     {
-        //
+        $res = JoinUsTag::find($joinUsTag);
+        return $this->sendResponse($res, 'Get successfully.');
     }
 
     /**
@@ -47,9 +55,15 @@ class JoinUsTagController extends Controller
      * @param  \App\Models\JoinUsTag  $joinUsTag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JoinUsTag $joinUsTag)
+    public function update(Request $request, JoinUsTag  $joinUsTag)
     {
-        //
+        $request->validate([
+            'tag' => 'required|string|unique:join_us_tags',
+        ]);
+
+        $joinUsTag->update($request->all());
+
+        return $this->sendResponse($joinUsTag, 'Updated successfully.');
     }
 
     /**
@@ -60,6 +74,7 @@ class JoinUsTagController extends Controller
      */
     public function destroy(JoinUsTag $joinUsTag)
     {
-        //
+        $joinUsTag->delete();
+        return $this->sendResponse($joinUsTag, 'Deleted successfully.');
     }
 }

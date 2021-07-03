@@ -65,19 +65,15 @@ class CategoryController extends BaseController
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category  $category)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
             'category' => 'required|string|unique:categories',
         ]);
 
-        $update = Category::find($category->id);
+        $category->update($request->all());
 
-        $update->category = $request->category;
-
-        $update->save();
-
-        return $this->sendResponse($update, 'Updated successfully.');
+        return $this->sendResponse($category, 'Updated successfully.');
     }
 
     /**

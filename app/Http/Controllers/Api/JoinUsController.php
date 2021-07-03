@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use App\Models\JoinUs;
 use Illuminate\Http\Request;
 
-class JoinUsController extends Controller
+class JoinUsController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class JoinUsController extends Controller
      */
     public function index()
     {
-        //
+        $jd = JoinUs::all();
+        return $this->sendResponse($jd, 'Get successfully.');
     }
 
     /**
@@ -26,7 +27,21 @@ class JoinUsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|unique:join_us',
+            'id_tag' => 'required|numeric',
+            'organisation' => 'required|string',
+            'reporting_to' => 'required|string',
+            'status' => 'required|string',
+            'project' => 'required|string',
+            'start_date' => 'required|string',
+            'location' => 'required|string',
+            'jd' => 'required'
+        ]);
+
+        $jd = JoinUs::create($request->all());
+
+        return $this->sendResponse($jd, 'Created successfully.');
     }
 
     /**
@@ -35,9 +50,10 @@ class JoinUsController extends Controller
      * @param  \App\Models\JoinUs  $joinUs
      * @return \Illuminate\Http\Response
      */
-    public function show(JoinUs $joinUs)
+    public function show($id)
     {
-        //
+        $jd = JoinUs::find($id);
+        return $this->sendResponse($jd, 'Get successfully.');
     }
 
     /**
@@ -47,9 +63,23 @@ class JoinUsController extends Controller
      * @param  \App\Models\JoinUs  $joinUs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JoinUs $joinUs)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'string|unique:join_us',
+            'id_tag' => 'numeric',
+            'organisation' => 'string',
+            'reporting_to' => 'string',
+            'status' => 'string',
+            'project' => 'string',
+            'start_date' => 'string',
+            'location' => 'string'
+        ]);
+
+        $joinUs = JoinUs::find($id);
+        $joinUs->update($request->all());
+
+        return $this->sendResponse($joinUs, 'Updated successfully.');
     }
 
     /**
@@ -58,8 +88,10 @@ class JoinUsController extends Controller
      * @param  \App\Models\JoinUs  $joinUs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JoinUs $joinUs)
+    public function destroy($id)
     {
-        //
+        $jd = JoinUs::find($id);
+        $jd->delete();
+        return $this->sendResponse($jd, 'Deleted successfully.');
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\BaseController;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class StaffController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+        return $this->sendResponse(Staff::all(), 'Get successfully!');
     }
 
     /**
@@ -26,7 +26,16 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'image' => 'required|url|active_url',
+            'quote' => 'required|string',
+            'position' => 'required|string',
+        ]);
+
+        $staff = Staff::create($request->all());
+
+        return $this->sendResponse($staff, 'Created successfully.');
     }
 
     /**
@@ -37,7 +46,7 @@ class StaffController extends Controller
      */
     public function show(Staff $staff)
     {
-        //
+        return $this->sendResponse($staff, 'Get successfully!');
     }
 
     /**
@@ -49,7 +58,16 @@ class StaffController extends Controller
      */
     public function update(Request $request, Staff $staff)
     {
-        //
+        $input = $request->validate([
+            'name' => 'string',
+            'image' => 'url|active_url',
+            'quote' => 'string',
+            'position' => 'string',
+        ]);
+
+        $staff->update($input);
+
+        return $this->sendResponse($staff, 'Updated successfully.');
     }
 
     /**
@@ -60,6 +78,7 @@ class StaffController extends Controller
      */
     public function destroy(Staff $staff)
     {
-        //
+        $staff->delete();
+        return $this->sendResponse($staff, 'Deleted successfully!');
     }
 }
