@@ -52,11 +52,9 @@ Route::middleware('auth:api')->group(function () {
  * number_overviews
  * categories
  * posts
- * comments
  * join_us
  * join_us_tags
  * staff
  * banners
- * donor_information
- *
+ * notifications
  */
