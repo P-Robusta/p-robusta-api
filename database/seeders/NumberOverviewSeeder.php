@@ -16,7 +16,7 @@ class NumberOverviewSeeder extends Seeder
     {
         DB::table('number_overviews')->insert([
             'current_students' => 130,
-            'alumni' => 490,
+            'alumni' => 1000,
             'percent_get_job' => 98,
             'partnership' => 50,
         ]);

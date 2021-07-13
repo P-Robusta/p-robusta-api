@@ -52,11 +52,30 @@ Route::middleware('auth:api')->group(function () {
  * number_overviews
  * categories
  * posts
- * comments
  * join_us
  * join_us_tags
  * staff
  * banners
- * donor_information
- *
+ * notifications
  */
+
+
+// Route get for client
+
+Route::prefix('client')->group(function () {
+    Route::apiResource('/number_overviews', NumberOverviewController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('categories', CategoryController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('posts', PostController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('join_us', JoinUsController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('join_us_tags', JoinUsTagController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('staff', StaffController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('banners', BannerController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('notifications', NotificationController::class)->except(['store', 'destroy'])->middleware('client');
+});
