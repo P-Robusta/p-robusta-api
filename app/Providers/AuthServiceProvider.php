@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         // Passport::loadKeysFrom(__DIR__ . '/../secrets/oauth');
         // Passport::hashClientSecrets();
         // Set expire for token
-        Passport::tokensExpireIn(now()->addYear(100));
+        Passport::tokensExpireIn(now()->addDays(30));
         Passport::refreshTokensExpireIn(now()->addDays(30));
         Passport::personalAccessTokensExpireIn(now()->addMonths(1));
         // Implicit Grant Tokens
