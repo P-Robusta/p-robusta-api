@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         // Set expire for token
         Passport::tokensExpireIn(now()->addDays(30));
         Passport::refreshTokensExpireIn(now()->addDays(30));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(1));
+        Passport::personalAccessTokensExpireIn(now()->addDay(2));
         // Implicit Grant Tokens
         // Passport::enableImplicitGrant();
     }
