@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Models\Staff;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
-class StaffController extends BaseController
+class PartnerController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class StaffController extends BaseController
      */
     public function index()
     {
-        return $this->sendResponse(Staff::all(), 'Get successfully!');
+        return $this->sendResponse(Partner::all(), 'Get successfully.');
     }
 
     /**
@@ -26,59 +26,56 @@ class StaffController extends BaseController
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
+        $input = $request->validate([
             'image' => 'required|url|active_url',
-            'quote' => 'required|string',
-            'position' => 'required|string',
+            'imgPNV' => 'url|active_url',
+            'text' => 'required|string'
         ]);
 
-        $staff = Staff::create($request->all());
-
-        return $this->sendResponse($staff, 'Created successfully.');
+        $partner = Partner::create($input);
+        return $this->sendResponse($partner, 'Created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Staff  $staff
+     * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function show(Staff $staff)
+    public function show(Partner $partner)
     {
-        return $this->sendResponse($staff, 'Get successfully!');
+        return $this->sendResponse($partner, 'Get successfully.');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Staff  $staff
+     * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, Partner $partner)
     {
         $input = $request->validate([
-            'name' => 'string',
+            'imgPNV' => 'url|active_url',
             'image' => 'url|active_url',
-            'quote' => 'string',
-            'position' => 'string',
+            'text' => 'string'
         ]);
 
-        $staff->update($input);
+        $partner->update($input);
 
-        return $this->sendResponse($staff, 'Updated successfully.');
+        return $this->sendResponse($partner, 'Updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Staff  $staff
+     * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staff $staff)
+    public function destroy(Partner $partner)
     {
-        $staff->delete();
-        return $this->sendResponse($staff, 'Deleted successfully!');
+        $partner->delete();
+        return $this->sendResponse($partner, 'Deleted successfully!');
     }
 }

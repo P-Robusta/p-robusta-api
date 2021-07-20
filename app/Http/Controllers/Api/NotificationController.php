@@ -56,11 +56,12 @@ class NotificationController extends BaseController
      */
     public function update(Request $request, Notification $notification)
     {
-        $request->validate([
-            'title' => 'string',
+        $input = $request->validate([
+            'read' => 'required|boolean',
         ]);
+        $notification->read = $input['read'];
 
-        $notification->update($request->all());
+        $notification->save();
 
         return $this->sendResponse($notification, 'Updated successfully.');
     }

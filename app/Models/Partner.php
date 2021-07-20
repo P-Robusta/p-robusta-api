@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Staff extends Model
+class Partner extends Model
 {
     use HasFactory;
-    protected $table = 'staff';
+
+    protected $table = 'partners';
 
     public $timestamps = true;
     /**
@@ -17,9 +18,8 @@ class Staff extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'imgPNV',
         'image',
-        'quote',
-        'position'
+        'text'
     ];
 }

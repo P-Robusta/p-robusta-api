@@ -2,19 +2,16 @@
 
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\DonorInformationController;
+use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\JoinUsController;
 use App\Http\Controllers\Api\JoinUsTagController;
 use App\Http\Controllers\Api\NumberOverviewController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\NotificationController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\PartnerController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\RegisterController;
-use App\Http\Controllers\Api\StaffController;
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,7 +37,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('join_us_tags', JoinUsTagController::class);
 
-    Route::apiResource('staff', StaffController::class);
+    Route::apiResource('feedback', FeedbackController::class);
+
+    Route::apiResource('partners', PartnerController::class);
 
     Route::apiResource('banners', BannerController::class);
 
@@ -73,7 +72,9 @@ Route::prefix('client')->group(function () {
 
     Route::apiResource('join_us_tags', JoinUsTagController::class)->except(['store', 'destroy'])->middleware('client');
 
-    Route::apiResource('staff', StaffController::class)->except(['store', 'destroy'])->middleware('client');
+    Route::apiResource('feedback', FeedbackController::class)->except(['store', 'destroy'])->middleware('client');
+
+    Route::apiResource('partners', PartnerController::class)->except(['store', 'destroy'])->middleware('client');
 
     Route::apiResource('banners', BannerController::class)->except(['store', 'destroy'])->middleware('client');
 

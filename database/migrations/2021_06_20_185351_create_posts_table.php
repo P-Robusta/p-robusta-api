@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->longText('content');
             $table->integer('id_category')->unsigned()->index();
             $table->foreign('id_category')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
-            $table->date('time_event');
+            $table->date('time_event')->nullable();
             $table->timestamps();
         });
     }

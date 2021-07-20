@@ -32,9 +32,6 @@ class CategoryController extends BaseController
 
         $validator = Validator::make($input, [
             'category' => 'required|string|unique:categories',
-        ], [
-            'category.unique' => 'Thẻ này đã tồn tại!!!',
-            'category.required' => 'Không được để trống trường này!'
         ]);
 
         if ($validator->fails()) {
