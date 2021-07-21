@@ -15,8 +15,7 @@ class NumberOverviewController extends BaseController
      */
     public function index()
     {
-        $num = NumberOverview::all();
-        return $this->sendResponse($num, 'Get successfully!');
+        return $this->sendResponse(NumberOverview::find(1), 'Get successfully!');
     }
 
     /**
@@ -50,10 +49,13 @@ class NumberOverviewController extends BaseController
     public function update(Request $request, NumberOverview  $numberOverview)
     {
         $input = $request->validate([
-            'current_students' => 'numeric',
+            'total_students' => 'numeric',
             'alumni' => 'numeric',
+            'current_students' => 'numeric',
+            'average_wage' => 'numeric',
             'percent_get_job' => 'numeric|max:100|min:0',
-            'partnership' => 'numeric',
+            'percent_alumni_it' => 'numeric|max:100|min:0',
+            'alumni_allowance' => 'numeric|max:100|min:0'
         ]);
 
         $numberOverview->update($input);

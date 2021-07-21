@@ -27,7 +27,7 @@ class FeedbackController extends BaseController
     public function store(Request $request)
     {
         $input = $request->validate([
-            'name' => 'required|string|max:150',
+            'name' => 'required|string',
             'image' => 'required|url|active_url',
             'quote' => 'required|string',
             'info' => 'required|string'

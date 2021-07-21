@@ -15,10 +15,13 @@ class NumberOverviewSeeder extends Seeder
     public function run()
     {
         DB::table('number_overviews')->insert([
+            'total_students' => 500,
+            'alumni' => 350,
             'current_students' => 130,
-            'alumni' => 1000,
-            'percent_get_job' => 98,
-            'partnership' => 50,
+            'average_wage' => 14567452,
+            'percent_get_job' => 94,
+            'percent_alumni_it' => 88,
+            'alumni_allowance' => 36
         ]);
     }
 }

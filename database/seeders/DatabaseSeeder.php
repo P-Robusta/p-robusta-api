@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NumberOverviewSeeder::class,
             CategorySeeder::class,
-            AdminAccSeeder::class
+            AdminAccSeeder::class,
+            OptionSeeder::class
         ]);
     }
 }

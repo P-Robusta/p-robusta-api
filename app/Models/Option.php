@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NumberOverview extends Model
+class Option extends Model
 {
     use HasFactory;
-    protected $table = 'number_overviews';
+
+    protected $table = 'options';
 
     public $timestamps = true;
     /**
@@ -17,12 +18,6 @@ class NumberOverview extends Model
      * @var array
      */
     protected $fillable = [
-        'total_students',
-        'alumni',
-        'current_students',
-        'average_wage',
-        'percent_get_job',
-        'percent_alumni_it',
-        'alumni_allowance'
+        'option',
     ];
 }

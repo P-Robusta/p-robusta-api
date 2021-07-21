@@ -15,10 +15,13 @@ class CreateNumberOverviewsTable extends Migration
     {
         Schema::create('number_overviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('current_students');
+            $table->integer('total_students');
             $table->integer('alumni');
+            $table->integer('current_students');
+            $table->integer('average_wage');
             $table->tinyInteger('percent_get_job');
-            $table->integer('partnership');
+            $table->tinyInteger('percent_alumni_it');
+            $table->tinyInteger('alumni_allowance');
             $table->timestamps();
         });
     }
