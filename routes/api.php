@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\PartnerController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,13 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('notifications', NotificationController::class);
 
+    // ---------------------------------------- Donation ----------------------------------------
+
     Route::apiResource('donors', DonorController::class);
 
     Route::apiResource('options', OptionController::class)->except(['store', 'destroy', 'update']);
+
+    Route::apiResource('transactions', TransactionController::class);
 });
 
 /**
@@ -91,7 +96,11 @@ Route::prefix('client')->group(function () {
 
     Route::apiResource('notifications', NotificationController::class)->except(['store', 'destroy', 'update'])->middleware('client');
 
-    Route::apiResource('donors', DonorController::class)->except(['store', 'destroy', 'update'])->middleware('client');
+    // ---------------------------------------- Donation ----------------------------------------
+
+    Route::apiResource('donors', DonorController::class)->except(['destroy'])->middleware('client');
 
     Route::apiResource('options', OptionController::class)->except(['store', 'destroy', 'update'])->middleware('client');
+
+    Route::apiResource('transactions', TransactionController::class)->except(['destroy', 'update'])->middleware('client');
 });

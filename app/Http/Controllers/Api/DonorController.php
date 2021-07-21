@@ -29,14 +29,13 @@ class DonorController extends BaseController
         $input = $request->validate([
             'name' => 'required|string',
             'code' => 'required|unique:donors,code|starts_with:DNTT',
-            'email' => 'required|email',
-            'phone' => 'required|string',
+            'email' => 'required|email|unique:donors,email',
+            'phone' => 'required|string|unique:donors,phone',
             'message' => 'nullable|string',
             'selectedOption' => 'required|exists:options,option',
-            'total' => 'nullable'
         ]);
 
-        $input['total'] = null;
+        $input['total'] = 0;
 
         $donor = Donor::create($input);
 
@@ -63,7 +62,18 @@ class DonorController extends BaseController
      */
     public function update(Request $request, Donor $donor)
     {
-        //
+        $input = $request->validate([
+            'name' => 'string',
+            'code' => 'unique:donors,code|starts_with:DNTT',
+            'email' => 'email|unique:donors,email',
+            'phone' => 'string',
+            'message' => 'nullable|string',
+            'selectedOption' => 'exists:options,option',
+        ]);
+
+        $donor->update($input);
+
+        return $this->sendResponse($donor, 'Updated successfully.');
     }
 
     /**
@@ -74,6 +84,7 @@ class DonorController extends BaseController
      */
     public function destroy(Donor $donor)
     {
-        //
+        $donor->delete();
+        return $this->sendResponse($donor, 'Deleted successfully.');
     }
 }

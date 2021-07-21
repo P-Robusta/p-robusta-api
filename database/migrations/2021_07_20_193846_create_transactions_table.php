@@ -14,7 +14,12 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->double('amount');
+
+            $table->integer('id_donor')->unsigned()->index();
+            $table->foreign('id_donor')->references('id')->on('donors')->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

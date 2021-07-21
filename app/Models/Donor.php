@@ -25,4 +25,9 @@ class Donor extends Model
         'selectedOption',
         'total'
     ];
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'id_donor', 'id');
+    }
 }
