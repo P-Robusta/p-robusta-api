@@ -39,7 +39,7 @@ class VNPAYController extends BaseController
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = $input['return_url'];
         $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = $input['return_url'];
+        $vnp_OrderInfo = $input['order_desc'];
         $vnp_OrderType = 'other';
         $vnp_Amount = $input['amount'] * 100;
         $vnp_Locale = $input['language'];
