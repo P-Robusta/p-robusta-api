@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\VNPAYController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('options', OptionController::class)->except(['store', 'destroy', 'update']);
 
     Route::apiResource('transactions', TransactionController::class);
+
+    Route::apiResource('donate-by-vnpay', VNPAYController::class)->except(['destroy', 'update', 'index']);
 });
 
 /**
@@ -103,4 +106,6 @@ Route::prefix('client')->group(function () {
     Route::apiResource('options', OptionController::class)->except(['store', 'destroy', 'update'])->middleware('client');
 
     Route::apiResource('transactions', TransactionController::class)->except(['destroy', 'update'])->middleware('client');
+
+    Route::apiResource('donate-by-vnpay', VNPAYController::class)->except(['destroy', 'update', 'index'])->middleware('client');
 });
