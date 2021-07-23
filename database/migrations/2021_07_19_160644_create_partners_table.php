@@ -15,9 +15,11 @@ class CreatePartnersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imgPNV')->nullable();
-            $table->string('image');
-            $table->text('text');
+            $table->string('name');
+            $table->string('image_with_pn')->nullable();
+            $table->string('logo');
+            $table->text('note_for_image')->nullable();
+            $table->string('website')->nullable();
             $table->timestamps();
         });
     }

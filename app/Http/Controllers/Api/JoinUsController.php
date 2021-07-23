@@ -29,7 +29,7 @@ class JoinUsController extends BaseController
     {
         $request->validate([
             'title' => 'required|string|unique:join_us',
-            'id_tag' => 'required|numeric',
+            'id_tag' => 'required|numeric|exists:join_us_tags,id',
             'organisation' => 'required|string',
             'reporting_to' => 'required|string',
             'status' => 'required|string',
@@ -67,7 +67,7 @@ class JoinUsController extends BaseController
     {
         $request->validate([
             'title' => 'string|unique:join_us',
-            'id_tag' => 'numeric',
+            'id_tag' => 'numeric|exists:join_us_tags,id',
             'organisation' => 'string',
             'reporting_to' => 'string',
             'status' => 'string',

@@ -18,8 +18,10 @@ class Partner extends Model
      * @var array
      */
     protected $fillable = [
-        'imgPNV',
-        'image',
-        'text'
+        'name',
+        'image_with_pn',
+        'logo',
+        'note_for_image',
+        'website'
     ];
 }

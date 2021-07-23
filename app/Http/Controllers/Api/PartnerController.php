@@ -27,9 +27,11 @@ class PartnerController extends BaseController
     public function store(Request $request)
     {
         $input = $request->validate([
-            'image' => 'required|url|active_url',
-            'imgPNV' => 'url|active_url',
-            'text' => 'required|string'
+            'name' => 'string',
+            'image_with_pn'  => 'url|active_url',
+            'logo'  => 'required|url|active_url',
+            'note_for_image' => 'string',
+            'website' => 'url|active_url'
         ]);
 
         $partner = Partner::create($input);
@@ -57,9 +59,11 @@ class PartnerController extends BaseController
     public function update(Request $request, Partner $partner)
     {
         $input = $request->validate([
-            'imgPNV' => 'url|active_url',
-            'image' => 'url|active_url',
-            'text' => 'string'
+            'name' => 'string',
+            'image_with_pn'  => 'url|active_url',
+            'logo'  => 'url|active_url',
+            'note_for_image' => 'string',
+            'website' => 'url|active_url'
         ]);
 
         $partner->update($input);
