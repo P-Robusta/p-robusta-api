@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\VNPAYController;
-
+use App\Http\Controllers\Api\SendEmailController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -59,6 +59,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('transactions', TransactionController::class);
 
     Route::apiResource('donate-by-vnpay', VNPAYController::class)->except(['destroy', 'update', 'index']);
+
+    // ---------------------------------------- Send Email ----------------------------------------
+    Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment'])->middleware('client');
 });
 
 /**
@@ -108,4 +111,7 @@ Route::prefix('client')->group(function () {
     Route::apiResource('transactions', TransactionController::class)->except(['destroy', 'update'])->middleware('client');
 
     Route::apiResource('donate-by-vnpay', VNPAYController::class)->except(['destroy', 'update', 'index'])->middleware('client');
+
+    // ---------------------------------------- Send Email ----------------------------------------
+    Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment'])->middleware('client');
 });
