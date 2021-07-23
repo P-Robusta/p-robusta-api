@@ -97,7 +97,7 @@ Route::prefix('client')->group(function () {
 
     Route::apiResource('banners', BannerController::class)->except(['store', 'destroy', 'update'])->middleware('client');
 
-    Route::apiResource('notifications', NotificationController::class)->except(['store', 'destroy', 'update'])->middleware('client');
+    Route::apiResource('notifications', NotificationController::class)->except(['index', 'show', 'destroy', 'update'])->middleware('client');
 
     // ---------------------------------------- Donation ----------------------------------------
 
