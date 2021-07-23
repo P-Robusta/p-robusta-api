@@ -61,7 +61,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('donate-by-vnpay', VNPAYController::class)->except(['destroy', 'update', 'index']);
 
     // ---------------------------------------- Send Email ----------------------------------------
-    Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment'])->middleware('client');
+    Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment']);
 });
 
 /**

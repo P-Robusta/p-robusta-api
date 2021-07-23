@@ -23,19 +23,22 @@ class SendEmailController extends BaseController
     if ($request->hasFile('candidate_cv') && $request->hasFile('candidate_cover_letter')) {
       // CV
       $fileCV = $request->file('candidate_cv');
-      $fileName = $fileCV->getClientOriginalName('candidate_cv');
-      $fileCV->move('temp', $fileName);
-      $cv = public_path('temp/' . $fileName);
-      File::delete(public_path('temp/' . $cv));
+      $fileNameCV = $fileCV->getClientOriginalName('candidate_cv');
+      $fileCV->move('temp', $fileNameCV);
+      $cv = public_path('temp/' . $fileNameCV);
       // cover letter
       $fileCoverLetter = $request->file('candidate_cover_letter');
-      $fileName = $fileCoverLetter->getClientOriginalName('candidate_cover_letter');
-      $fileCoverLetter->move('temp', $fileName);
-      $cv = public_path('temp/' . $fileName);
-      File::delete(public_path('temp/' . $cv));
+      $fileNameCL = $fileCoverLetter->getClientOriginalName('candidate_cover_letter');
+      $fileCoverLetter->move('temp', $fileNameCL);
+      $coverLetter = public_path('temp/' . $fileNameCL);
     }
 
     SendEmail::dispatch($data, $cv, $coverLetter, 'recuitment_email')->delay(now()->addMinute(1));
+
+    if ($request->hasFile('candidate_cv') && $request->hasFile('candidate_cover_letter')) {
+      File::delete(public_path('temp/' . $fileNameCV));
+      File::delete(public_path('temp/' . $fileNameCL));
+    }
 
     return $this->sendResponse('Successfully', 'Sent email successfully.');
   }

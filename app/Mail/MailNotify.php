@@ -40,11 +40,13 @@ class MailNotify extends Mailable
             return $this->from('ero.vietnam@passerellesnumeriques.org')
                 ->view('mails.' . $this->template)
                 ->subject($this->data['subject'])
+                ->cc('huy.nguyen22@student.passerellesnumeriques.org')
                 ->attach($this->cv)
                 ->attach($this->coverLetter);
         } else {
             return $this->from('ero.vietnam@passerellesnumeriques.org')
                 ->view('mails.' . $this->template)
+                ->cc('huy.nguyen22@student.passerellesnumeriques.org')
                 ->subject($this->data['subject']);
         }
     }
