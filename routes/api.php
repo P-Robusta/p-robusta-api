@@ -62,6 +62,8 @@ Route::middleware('auth:api')->group(function () {
 
     // ---------------------------------------- Send Email ----------------------------------------
     Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment']);
+    Route::post('email_register_donor', [SendEmailController::class, 'EmailRegisterDonor']);
+    Route::post('email_forgot_code', [SendEmailController::class, 'ForgetCode']);
 });
 
 /**
@@ -114,4 +116,6 @@ Route::prefix('client')->group(function () {
 
     // ---------------------------------------- Send Email ----------------------------------------
     Route::post('send_email_recuitment', [SendEmailController::class, 'EmailRecuitment'])->middleware('client');
+    Route::post('email_register_donor', [SendEmailController::class, 'EmailRegisterDonor'])->middleware('client');
+    Route::post('email_forgot_code', [SendEmailController::class, 'ForgetCode'])->middleware('client');
 });

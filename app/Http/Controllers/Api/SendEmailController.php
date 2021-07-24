@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController;
 use App\Jobs\SendEmail;
+use App\Models\Donor;
 use Illuminate\Support\Facades\File;
 
 class SendEmailController extends BaseController
@@ -41,5 +42,43 @@ class SendEmailController extends BaseController
     }
 
     return $this->sendResponse('Successfully', 'Sent email successfully.');
+  }
+
+  public function EmailRegisterDonor(Request $request)
+  {
+    $data = [
+      'subject' => "Email Register to Become a Donor for #IT-RAISE-DONOR",
+      'name' => $request->input('name'),
+      'phone' => $request->input('phone'),
+      'email' => $request->input('email'),
+      'code' => $request->input('code'),
+      'selectedOption' => $request->input('selectedOption')
+    ];
+
+    SendEmail::dispatch($data, null, null, 'register_become_donor')->delay(now()->addMinute(1));
+
+    return $this->sendResponse('Successfully', 'Sent email successfully.');
+  }
+
+  public function ForgetCode(Request $request)
+  {
+
+    $donor = Donor::where('email', $request->input('email'))->first();
+    if ($donor) {
+      $data = [
+        'subject' => "Email Register to Become a Donor for #IT-RAISE-DONOR",
+        'name' => $donor['name'],
+        'phone' => $donor['phone'],
+        'email' => $donor['email'],
+        'code' => $donor['code'],
+        'selectedOption' => $donor['selectedOption']
+      ];
+
+      SendEmail::dispatch($data, null, null, 'register_become_donor')->delay(now()->addMinute(1));
+
+      return $this->sendResponse('Successfully', 'Sent email successfully.');
+    } else {
+      return $this->sendResponse('Failfully', 'Sent email failfully.');
+    }
   }
 }
